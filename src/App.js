@@ -1,24 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
-
+import LandingPage from "./components/LandingPage";
+import AddPost from "./components/UI/AddPost";
+import React, {useState} from "react";
+export const store=React.createContext({
+});
 function App() {
+  
+  const [CartOpen, setCartOpen] = useState(false);
+  const [AlbumData, setAlbumData] = useState([]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <store.Provider value={{CartOpen,setCartOpen,AlbumData,setAlbumData}}>
+    <LandingPage CartOpen={setCartOpen} setdata={{setAlbumData}}/>
+    {CartOpen&&<AddPost setdata={setAlbumData} data={AlbumData} CartOpen={setCartOpen} />}
+    </store.Provider>
+    
   );
 }
 
